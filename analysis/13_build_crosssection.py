@@ -1,0 +1,59 @@
+"""
+13_build_crosssection.py
+------------------------
+Collapse the annual panel (panel.csv) to 14 country-level averages,
+merge with cultural variables (cultural_vars.csv), and produce the
+cross-section dataset used in script 18.
+
+Output: data/processed/crosssection.csv (14 rows)
+Run from repo root:  python analysis/13_build_crosssection.py
+"""
+
+import os
+import pandas as pd
+
+p = pd.read_csv("data/processed/panel.csv")
+cv = pd.read_csv("data/manual/cultural_vars.csv")
+
+assert cv["country"].is_unique, \
+    "Duplicate country rows in cultural_vars.csv — check for unresolved merge markers."
+ANALYTICAL_COLS = ["smam_female", "muslim_share", "female_mean_schooling"]
+assert cv[ANALYTICAL_COLS].notna().all().all(), \
+    f"Missing values in cultural_vars.csv analytical columns:\n{cv[ANALYTICAL_COLS].isna().sum()}"
+
+agg = p.groupby("country").agg(
+    mean_tfr=("tfr", "mean"),
+    mean_log_gdp_ppp=("log_gdp_ppp", "mean"),
+    mean_urban=("urban_pop_pct", "mean"),
+    mean_remittances=("remittances_gdp_pct", "mean"),
+    mean_under5_mort=("under5_mortality", "mean"),
+    bloc=("bloc", "first"),
+).reset_index()
+agg["ca"] = (agg["bloc"] == "Central Asia").astype(int)
+
+panel_countries = set(agg["country"])
+cv_countries = set(cv["country"])
+assert panel_countries == cv_countries, (
+    f"Country mismatch between panel and cultural_vars.csv:\n"
+    f"  In panel but not cultural: {panel_countries - cv_countries}\n"
+    f"  In cultural but not panel: {cv_countries - panel_countries}"
+)
+
+cs = agg.merge(cv, on="country", how="left", validate="one_to_one")
+
+
+CS_ANALYTICAL_COLS = ["country", "bloc", "ca", "mean_tfr", "mean_log_gdp_ppp",
+                      "mean_urban", "mean_remittances", "mean_under5_mort"] + ANALYTICAL_COLS
+assert len(cs) == 14, f"Expected 14 rows, got {len(cs)}"
+assert cs[CS_ANALYTICAL_COLS].notna().all().all(), (
+    f"Missing values in analytical columns after merge:\n"
+    f"{cs[CS_ANALYTICAL_COLS].isna().sum()}"
+)
+
+os.makedirs("data/processed", exist_ok=True)
+cs.to_csv("data/processed/crosssection.csv", index=False)
+
+print(f"Cross-section built: {len(cs)} countries, {cs.shape[1]} columns")
+print(cs[["country", "bloc", "ca", "mean_tfr", "smam_female",
+          "muslim_share", "female_mean_schooling"]].to_string(index=False))
+print("\nSaved -> data/processed/crosssection.csv")

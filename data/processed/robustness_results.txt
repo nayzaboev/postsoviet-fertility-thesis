@@ -1,0 +1,147 @@
+ROBUSTNESS — leave-one-out, exclusions, descriptive table, HC3 inference, permutation test, interaction fragility
+
+======================================================================
+(A) LEAVE-ONE-COUNTRY-OUT — M2 CA coefficient stability
+======================================================================
+Baseline M2 (14 countries, N=315): CA = +0.971 (p=0.000)
+
+  Drop Armenia       : CA = +0.972  (p=0.000, N=292, exact p=0.0056)
+  Drop Azerbaijan    : CA = +1.054  (p=0.000, N=292, exact p=0.0002)
+  Drop Belarus       : CA = +0.971  (p=0.000, N=292, exact p=0.0083)
+  Drop Estonia       : CA = +0.968  (p=0.000, N=292, exact p=0.0037)
+  Drop Georgia       : CA = +1.041  (p=0.000, N=292, exact p=0.0154)
+  Drop Kazakhstan    : CA = +1.081  (p=0.000, N=292, exact p=0.0002)
+  Drop Kyrgyzstan    : CA = +0.963  (p=0.000, N=292, exact p=0.0083)
+  Drop Latvia        : CA = +0.969  (p=0.000, N=292, exact p=0.0059)
+  Drop Lithuania     : CA = +0.968  (p=0.000, N=292, exact p=0.0083)
+  Drop Moldova       : CA = +0.778  (p=0.000, N=292, exact p=0.0024)
+  Drop Russia        : CA = +0.959  (p=0.000, N=292, exact p=0.0088)
+  Drop Tajikistan    : CA = +0.951  (p=0.000, N=294, exact p=0.0066)
+  Drop Ukraine       : CA = +0.955  (p=0.000, N=292, exact p=0.0046)
+  Drop Uzbekistan    : CA = +1.004  (p=0.000, N=297, exact p=0.0176)
+
+  Range: [+0.778, +1.081]
+  The premium is not driven by any single country: the coefficient stays
+  positive and of similar magnitude regardless of which country is dropped.
+
+======================================================================
+(B) EXCLUSION SENSITIVITY
+======================================================================
+  Baseline (all data)                   : CA = +0.971 (SE 0.118, p=0.000, N=315, exact p=0.0055)
+  Excl. Ukraine 2022-2023 (war)         : CA = +0.965 (SE 0.114, p=0.000, N=313, exact p=0.0054)
+  Excl. Uzbekistan 2018-2023 (surge)    : CA = +0.938 (SE 0.126, p=0.000, N=309, exact p=0.0033)
+  Excl. Tajikistan entirely             : CA = +0.951 (SE 0.117, p=0.000, N=294, exact p=0.0066)
+  Excl. Azerbaijan entirely             : CA = +1.054 (SE 0.134, p=0.000, N=292, exact p=0.0002)
+
+  The premium is robust to all four exclusions.
+
+  Period-wide war exclusions (all countries, fuller spec set: M1, M2, M2h):
+
+  Excl. 2022-2023, all countries (war period)  [M1 ]: CA = +1.282 (SE 0.181, p=0.000, N=287, exact p=0.0001)
+  Excl. 2022-2023, all countries (war period)  [M2 ]: CA = +0.916 (SE 0.129, p=0.000, N=287, exact p=0.0073)
+  Excl. 2022-2023, all countries (war period)  [M2h]: CA = +0.898 (SE 0.136, p=0.000, N=287, exact p=0.0507)
+  Excl. 2020-2023, all countries (war + COVID) [M1 ]: CA = +1.250 (SE 0.201, p=0.000, N=259, exact p=0.0001)
+  Excl. 2020-2023, all countries (war + COVID) [M2 ]: CA = +0.860 (SE 0.141, p=0.000, N=259, exact p=0.0139)
+  Excl. 2020-2023, all countries (war + COVID) [M2h]: CA = +0.846 (SE 0.138, p=0.000, N=259, exact p=0.0608)
+
+  READING: the Central Asia premium is robust to period-wide exclusion of the
+  war years and to the harsher war-plus-COVID exclusion; the point estimate on
+  M2h moves from +0.964 to +0.898; exact Rademacher p-values for M2h rise above five per cent under both cuts (see the CSV output).
+
+======================================================================
+(C) DESCRIPTIVE COUNTRY TABLE — TFR at key time points
+======================================================================
+
+                           bloc  TFR_2000  TFR_2010  TFR_2017  TFR_2023  change_2000_2023  change_2017_2023 estimate_method_2023
+country                                                                                                                         
+Kazakhstan         Central Asia      1.90      2.61      2.75      3.01              1.11              0.27           Projection
+Kyrgyzstan         Central Asia      2.58      3.10      3.04      2.80              0.22             -0.24           Projection
+Tajikistan         Central Asia      3.49      3.46      3.29      3.07             -0.42             -0.22           Projection
+Uzbekistan         Central Asia      2.70      2.44      2.57      3.50              0.80              0.93           Projection
+Armenia     Rest of post-Soviet      1.47      1.59      1.56      1.71              0.24              0.15           Projection
+Azerbaijan  Rest of post-Soviet      1.70      1.92      1.96      1.67             -0.03             -0.29           Projection
+Belarus     Rest of post-Soviet      1.27      1.48      1.55      1.21             -0.06             -0.34           Projection
+Estonia     Rest of post-Soviet      1.35      1.72      1.60      1.35              0.00             -0.25           Projection
+Georgia     Rest of post-Soviet      1.61      1.97      2.14      1.81              0.20             -0.33           Projection
+Latvia      Rest of post-Soviet      1.24      1.37      1.70      1.34              0.09             -0.36        Interpolation
+Lithuania   Rest of post-Soviet      1.38      1.50      1.63      1.20             -0.18             -0.43        Interpolation
+Moldova     Rest of post-Soviet      1.50      1.70      1.81      1.73              0.23             -0.08           Projection
+Russia      Rest of post-Soviet      1.19      1.59      1.63      1.45              0.26             -0.18        Interpolation
+Ukraine     Rest of post-Soviet      1.11      1.44      1.30      0.98             -0.13             -0.32           Projection
+
+  estimate_method_2023: 11 of 14 countries' 2023 TFR is a
+  WPP PROJECTION rather than a retrospective interpolated estimate.
+
+======================================================================
+(D) COUNTRY-MEAN HC3 — country-level HC3 sensitivity
+======================================================================
+OLS on 14 country averages with HC3 SEs. Reduces reliance on cluster asymptotics.
+
+  CA: +1.324  (HC3 SE 0.211, p=0.000)
+  R2: 0.878
+  Note: this is the RAW gap at country level (no economic controls).
+
+======================================================================
+(E) PERMUTATION TEST — nonparametric significance of the raw gap
+======================================================================
+  Observed gap: +1.324
+  Groupings with gap >= observed: 1 of 1001   one-sided permutation p = 0.0010
+  (One-sided: the count is of groupings at least as far in the SAME direction
+  as the observed gap, i.e. gap >= observed, not |gap| >= |observed|.)
+  The observed CA grouping is the most extreme of all 1,001 four-country splits.
+  CAVEAT: this tests whether the grouping is unusual, not whether 'Central Asia'
+  causes higher fertility. It is a nonparametric check on the raw gap only.
+
+======================================================================
+(F) INTERACTION FRAGILITY — CA x remittances
+======================================================================
+Is the CA x remittances interaction driven by particular countries?
+
+  Drop none                      : CA x rem = +0.0157  p=0.001
+  Drop Tajikistan                : CA x rem = +0.0143  p=0.008
+  Drop Kyrgyzstan                : CA x rem = +0.0164  p=0.002
+  Drop Tajikistan + Kyrgyzstan   : CA x rem = +0.0265  p=0.268
+
+  HONEST READING: the interaction survives dropping Tajikistan OR Kyrgyzstan
+  individually, but collapses when BOTH are removed. It therefore rests on
+  two of the four Central Asian countries and is concentrated in the two
+  high-remittance Central Asian economies (Tajikistan and Kyrgyzstan) and
+  should NOT be reported as a general Central Asian regularity.
+  Remittances are endogenous and do not isolate a migration channel; any
+  labour-migration interpretation must be carried by the literature, not
+  this regression.
+
+  Note also that all 8 missing remittance observations fall in Central Asia
+  (Uzbekistan 5, Tajikistan 2, Kyrgyzstan 1), so remittance coverage is
+  weakest precisely in the group of interest.
+
+======================================================================
+(G) WILD-CLUSTER BOOTSTRAP — few-cluster robustness check
+======================================================================
+Rademacher wild-cluster bootstrap (cluster = country, 14 clusters).
+With only 14 clusters and 4 treated (Central Asia), asymptotic clustered
+p-values are too optimistic. The bootstrap resamples cluster-level weights
+and re-estimates, giving a p-value that reduces reliance on conventional cluster asymptotics.
+B = 1999 replications. Reference: Cameron, Gelbach & Miller (2008).
+
+  M1 raw CA premium           : coef=+1.3144  p(asymp)=0.000  p(wild-boot)=0.001
+  M2 controlled CA premium    : coef=+0.9707  p(asymp)=0.000  p(wild-boot)=0.006
+  M2h Mundlak CA premium      : coef=+0.9637  p(asymp)=0.000  p(wild-boot)=0.033
+  CA x remittances            : coef=+0.0157  p(asymp)=0.001  p(wild-boot)=0.026
+  CA x urbanisation           : coef=-0.0119  p(asymp)=0.054  p(wild-boot)=0.313
+
+  READING: the raw and controlled CA premium remain significant under the
+  wild-cluster bootstrap. The interaction terms are much weaker once
+  few-cluster inference is used: CA x urbanisation is clearly insignificant,
+  and CA x remittances is at best marginal. Report the CA premium as robust
+  and the interactions as suggestive only.
+  CAVEAT: with only 4 treated clusters, even the wild bootstrap is
+  approximate; treat interaction p-values as indicative, not definitive.
+
+  Exact Rademacher enumeration (M2h 'ca' coefficient, 2^14 = 16,384 sign
+  assignments — no Monte Carlo error):
+    t_obs = +6.873   exact p = 0.0330  (enumerated all 16,384 sign patterns)
+    Seeded 1999-draw Monte Carlo wild-cluster bootstrap (above): p = 0.033
+    The exact and simulated p-values agree closely, confirming B=1999 draws
+    were already sufficient and there is no residual simulation error in
+    the headline M2h wild-cluster bootstrap result.

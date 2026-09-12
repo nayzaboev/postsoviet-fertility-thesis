@@ -1,0 +1,50 @@
+# ── Raw data ── large files, don't version
+data/raw/*
+!data/raw/README.md
+# Freeze the small World Bank WDI inputs so the pipeline is reproducible
+# without a live API call (results can change when the WB revises series).
+!data/raw/raw_wb_*.csv
+# Freeze the UN WPP export used by 01_clean_data.py as well.
+!data/raw/unpopulation_dataportal_*.csv
+# Freeze the Pew Research religious composition CSV used by build_muslim_share.py.
+!data/raw/Religious Composition 2010-2020 (percentages).csv
+
+# ── But DO keep the clean processed table ──
+!data/processed/
+!data/processed/*.csv
+
+# ── And the manually-entered cultural variables ──
+!data/manual/
+!data/manual/*.csv
+
+# ── Source PDFs ── keep locally, back up in Drive
+sources/
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.env
+venv/
+.venv/
+*.egg-info/
+
+# ── R (if you switch to R later) ──
+.Rhistory
+.Rdata
+.Rproj.user/
+
+# ── VS Code ──
+.vscode/
+
+# ── Mac OS ──
+.DS_Store
+*.DS_Store
+
+# ── Excel/Office temp files ──
+~$*.xlsx
+~$*.docx
+*.tmp
+
+# ── Figures (optional — commit these if you want plots versioned) ──
+# figures/

@@ -1,0 +1,68 @@
+DIAGNOSTICS — VIF (pooled/between/within), Mundlak test (FE vs RE), few-cluster caveat.
+
+================================================================
+(A) Variance Inflation Factors (lagged covariates)
+================================================================
+Rule of thumb: VIF > 5 concerning, > 10 serious.
+Reported three ways so the source of any collinearity is transparent:
+  pooled   = the raw lagged covariates (what the pooled M2 model uses)
+  between  = country means of each covariate (the Mundlak between block)
+  within   = deviations from country means (the Mundlak within block)
+
+  variable                     pooled   between    within
+  -------------------------- --------  --------  --------
+  log_gdp_ppp_lag1               5.60     14.34      3.86   (between: SERIOUS)
+  urban_pop_pct_lag1             4.87     13.34      1.55   (between: SERIOUS)
+  remittances_gdp_pct_lag1       4.13     17.05      1.39   (between: SERIOUS)
+  under5_mortality_lag1          3.94      5.51      4.40   (between: CONCERNING)
+  ca (between design)               —      3.06         —   (between: OK)
+
+  READING: pooled VIFs are moderate, but the BETWEEN-country components are
+  highly collinear (GDP mean, urbanisation mean and remittances mean all
+  near or above the VIF>=10 threshold), while the WITHIN components are low.
+  Consequence: the between-country control coefficients in the Mundlak hybrid
+  (M2h) are individually imprecise and must NOT be interpreted one at a time.
+  The CA dummy has only a moderate between VIF, and its estimated coefficient
+  remains stable across the pooled (M2) and hybrid (M2h) specifications, so
+  multicollinearity does not undermine the CA premium; but the individual
+  between-country control coefficients are collinear and must not be
+  interpreted one at a time.
+
+================================================================
+(D) Joint significance of the four controls in M2 (clustered)
+================================================================
+  F(4, 13) = 6.524   p = 0.0042
+  The four lagged controls are jointly significant at the one per cent
+  level under cluster-robust inference; individual coefficients are not.
+
+================================================================
+(B) Mundlak test — fixed effects vs random effects
+================================================================
+Classical Hausman is NOT reported: Var(b_FE) - Var(b_RE) is not positive
+definite here (3 of 4 eigenvalues negative), so the statistic is undefined.
+The Mundlak auxiliary-regression test is used instead.
+Correct restriction: H0 is that the between and within coefficients are
+EQUAL for every regressor (not that the between coefficients are zero).
+
+  H0: beta_between = beta_within for all 4 regressors (random effects consistent)
+  F(4, 13) = 1.339   p = 0.3077
+  => FAIL to reject H0: no statistical evidence that within and between
+     coefficients differ, i.e. no evidence random effects is inconsistent.
+     The fixed-effects / hybrid specification is retained on substantive
+     grounds (strong country heterogeneity, and the research question
+     concerns between-country differences), not on the basis of this test.
+
+  For reference only (NOT the RE-consistency test):
+  H0: all between-country mean coefficients = 0
+  F(4, 13) = 21.225   p = 0.0000
+  This tests whether country means jointly predict TFR — a separate question.
+
+================================================================
+(C) Few-cluster caveat
+================================================================
+  Standard errors throughout Part 2 are clustered on country (14 clusters).
+  14 clusters is below the commonly cited safe threshold (~30-50). With few
+  clusters, cluster-robust SEs can be anti-conservative (too small), so
+  p-values near 0.05 should be read with caution. The wild-cluster bootstrap
+  in script 19 (section G) is the recommended few-cluster robustness check.
+  This is a known small-N limitation of the post-Soviet sample, not a coding issue.

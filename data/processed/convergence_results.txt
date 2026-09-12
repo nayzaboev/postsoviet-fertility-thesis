@@ -1,0 +1,280 @@
+CONVERGENCE ANALYSIS - sigma-convergence (dispersion) and beta-convergence (catch-up)
+All results are descriptive; n = 14 countries.
+
+========================================================================
+(A) SIGMA-CONVERGENCE — cross-country dispersion in TFR
+========================================================================
+Coefficient of variation (sd/mean) computed across countries within
+each year. Falling CV = countries becoming more similar.
+
+CV across all 14 countries:
+year
+2000    0.398
+2005    0.363
+2010    0.331
+2015    0.302
+2020    0.367
+2023    0.428
+
+CV within each bloc:
+bloc  Central Asia  Rest of post-Soviet
+year                                   
+2000         0.245                0.136
+2005         0.185                0.157
+2010         0.160                0.124
+2015         0.134                0.137
+2020         0.024                0.137
+2023         0.095                0.192
+
+CV within each sub-group:
+subgroup  Baltic  Caucasus  Central Asia  Eastern European
+year                                                      
+2000       0.054     0.072         0.245             0.132
+2005       0.080     0.155         0.185             0.110
+2010       0.115     0.115         0.160             0.077
+2015       0.044     0.159         0.134             0.126
+2020       0.033     0.100         0.024             0.163
+2023       0.064     0.041         0.095             0.241
+
+------------------------------------------------------------------------
+Absolute dispersion across all 14 countries (SD and IQR), for comparison
+with the scale-free CV above. If CV falls but SD/IQR do not, the CV move is
+partly a denominator (mean) effect rather than genuine compression.
+
+       mean     SD    IQR     CV
+year                            
+2000  1.749  0.696  0.557  0.398
+2005  1.805  0.655  0.880  0.363
+2010  1.991  0.659  0.804  0.331
+2015  2.121  0.642  0.785  0.302
+2020  2.020  0.741  1.266  0.367
+2023  1.917  0.820  1.212  0.428
+
+  2000->2023: SD +0.124, CV +0.030. Read together: a falling
+  CV accompanied by a roughly flat or rising SD indicates the CV change is
+  substantially a mean (denominator) effect, not pure absolute compression.
+
+------------------------------------------------------------------------
+Absolute dispersion (SD and IQR) BY BLOC, for comparison with the pooled
+series above. The pooled SD can be flat or rising even if one bloc is
+compressing, if the other bloc is diverging at the same time.
+
+               SD                              IQR                    
+bloc Central Asia Rest of post-Soviet Central Asia Rest of post-Soviet
+year                                                                  
+2000        0.653               0.187        0.488               0.238
+2005        0.496               0.228        0.436               0.231
+2010        0.463               0.202        0.618               0.229
+2015        0.403               0.242        0.559               0.208
+2020        0.074               0.218        0.091               0.236
+2023        0.293               0.278        0.220               0.463
+
+  Central Asia SD:        0.653 (2000) -> 0.319 (2017) -> 0.293 (2023)
+  Rest of post-Soviet SD: 0.187 (2000) -> 0.234 (2017) -> 0.278 (2023)
+  READING: Central Asia's absolute dispersion FALLS over 2000-2023 (within-
+  bloc convergence in levels, not just CV) while the rest of the post-Soviet
+  space DIVERGES in absolute terms. Both movements are genuine — visible in
+  SD/IQR, not an artifact of the CV denominator — and they run in opposite
+  directions, so the pooled 14-country dispersion series understates how much
+  is happening within each bloc.
+
+------------------------------------------------------------------------
+Trend test: regress CV on a linear year term.
+Newey-West SEs (4 lags) because CV series are strongly serially correlated.
+A negative, significant slope indicates sigma-convergence.
+
+  All 14 countries                : slope/yr = -0.00070  p = 0.758   (convergence, not significant)
+  Bloc: Central Asia              : slope/yr = -0.00751  p = 0.000   (convergence, significant)
+  Bloc: Rest of post-Soviet       : slope/yr = +0.00163  p = 0.025   (divergence, significant)
+  Sub-group: Baltic               : slope/yr = -0.00097  p = 0.359   (convergence, not significant)
+  Sub-group: Caucasus             : slope/yr = +0.00007  p = 0.972   (divergence, not significant)
+  Sub-group: Central Asia         : slope/yr = -0.00751  p = 0.000   (convergence, significant)
+  Sub-group: Eastern European     : slope/yr = +0.00435  p = 0.050   (divergence, significant)
+
+  Reading: a negative slope means the countries in that grouping grew more
+  alike; a positive slope means they diverged. Note that dispersion can fall
+  within a bloc while the gap BETWEEN blocs widens - these are separate facts.
+
+------------------------------------------------------------------------
+War-period sensitivity: CV trend on year <= 2021 vs. full period 2000-2023
+Same Newey-West (HAC, 4 lags) specification as the trend test above.
+
+  All 14 countries          : full = -0.00070 (p=0.758)   <=2021 = -0.00280 (p=0.143)
+  Bloc: Central Asia        : full = -0.00751 (p=0.000)   <=2021 = -0.00815 (p=0.000)
+  Bloc: Rest of post-Soviet : full = +0.00163 (p=0.025)   <=2021 = +0.00068 (p=0.088)
+
+  Excluding the 2022-2023 war-period observations leaves Central Asian
+  convergence essentially unchanged (slope -0.008, p = 0.000). The
+  non-Central-Asian divergence slope weakens (+0.00163 -> +0.00068) and
+  loses conventional significance (p = 0.088). The bifurcation reported
+  above is therefore driven primarily by robust Central Asian convergence;
+  the divergence within the rest of the sample is partly attributable to
+  the 2022-2023 fertility declines and should be interpreted with
+  corresponding caution.
+
+========================================================================
+(B) BETA-CONVERGENCE — catch-up across the 14 countries
+========================================================================
+Specification: (1/21) * ln(TFR_end / TFR_start) = alpha + beta * ln(TFR_start)
+Endpoints are 3-year averages: start = mean(2000-2002), end = mean(2021-2023).
+n = 14 countries. HC3 standard errors with small-sample t inference.
+
+  UNCONDITIONAL beta-convergence:
+    beta = +0.0013  (HC3 SE 0.0116, p = 0.911)
+    95% CI [-0.0240, +0.0267]     R2 = 0.004
+    => Positive: no evidence of catch-up. Initially higher-fertility
+       countries did NOT decline faster; if anything the opposite.
+
+  CONDITIONAL beta-convergence (adds the Central Asia dummy):
+    ln_tfr_start    : -0.0201  (HC3 SE 0.0267, p = 0.467)
+    ca              : +0.0176  (HC3 SE 0.0187, p = 0.368)
+    R2 = 0.270
+    Reading: the CA dummy asks whether Central Asian countries followed a
+    different trajectory once their 2000 starting level is accounted for.
+    A positive CA coefficient means Central Asia declined less (or rose
+    more) than its starting level alone would predict.
+
+  CAVEAT (Galton's fallacy, Quah 1993): beta-convergence is necessary but
+  NOT sufficient for sigma-convergence, and a negative beta can arise from
+  regression to the mean if initial TFR is measured with error. Read
+  sections (A) and (B) together, and treat both as descriptive summaries
+  at n = 14.
+
+========================================================================
+(B2) PERIOD-SPLIT SIGMA-CONVERGENCE (pre/post 2017)
+========================================================================
+A single linear trend over 2000-2023 masks a turning point. Fitting the
+CV trend separately on 2000-2016 and 2017-2023 shows the real pattern.
+
+  All 14 countries                
+      2000-2016: slope=-0.00715 (p=0.000)   2017-2023: slope=+0.01954 (direction only, n=7)
+  Bloc: Central Asia              
+      2000-2016: slope=-0.00695 (p=0.000)   2017-2023: slope=-0.00371 (direction only, n=7)
+  Bloc: Rest of post-Soviet       
+      2000-2016: slope=-0.00011 (p=0.863)   2017-2023: slope=+0.00912 (direction only, n=7)
+  Sub-group: Baltic               
+      2000-2016: slope=-0.00069 (p=0.687)   2017-2023: slope=+0.00990 (direction only, n=7)
+  Sub-group: Caucasus             
+      2000-2016: slope=+0.00459 (p=0.001)   2017-2023: slope=-0.02080 (direction only, n=7)
+  Sub-group: Central Asia         
+      2000-2016: slope=-0.00695 (p=0.000)   2017-2023: slope=-0.00371 (direction only, n=7)
+  Sub-group: Eastern European     
+      2000-2016: slope=-0.00221 (p=0.280)   2017-2023: slope=+0.01839 (direction only, n=7)
+
+  READING: for the all-14 series, dispersion fell over 2000-2016 and rose
+  over 2017-2023. The near-zero full-period slope averages these opposing phases.
+  CAVEAT: the post-2017 window has only 7 annual observations. HAC p-values on
+  T=7 are NOT reliable, so NO significance is claimed for the post-2017 period.
+  Only the slope SIGN and the descriptive pattern (compression then divergence,
+  visible in the raw CV series) are reported. Do NOT cite a post-2017 p-value
+  or describe the post-2017 change as statistically significant.
+
+========================================================================
+(B3) CONVERGENCE LEAVE-ONE-OUT (bloc trends)
+========================================================================
+Re-fit each bloc's full-period CV trend dropping one country at a time.
+If significance vanishes when a single country is removed, the trend is
+country-driven, not a group-wide regularity.
+
+  Bloc: Rest of post-Soviet  (full-period slope=+0.00163, p=0.025)
+      drop Armenia       : slope=+0.00155 (p=0.034)
+      drop Azerbaijan    : slope=+0.00332 (p=0.001)
+      drop Belarus       : slope=+0.00177 (p=0.008)
+      drop Estonia       : slope=+0.00164 (p=0.047)
+      drop Georgia       : slope=+0.00074 (p=0.485)  <-- significance LOST when dropped
+      drop Latvia        : slope=+0.00191 (p=0.021)
+      drop Lithuania     : slope=+0.00168 (p=0.009)
+      drop Moldova       : slope=+0.00158 (p=0.023)
+      drop Russia        : slope=+0.00198 (p=0.008)
+      drop Ukraine       : slope=+0.00026 (p=0.632)  <-- significance LOST when dropped
+    => trend depends materially on: Georgia, Ukraine
+
+  Bloc: Central Asia  (full-period slope=-0.00751, p=0.000)
+      drop Kazakhstan    : slope=-0.00470 (p=0.000)
+      drop Kyrgyzstan    : slope=-0.01046 (p=0.000)
+      drop Tajikistan    : slope=-0.00205 (p=0.132)  <-- significance LOST when dropped
+      drop Uzbekistan    : slope=-0.01077 (p=0.000)
+    => trend depends materially on: Tajikistan
+
+  Report bloc convergence/divergence trends that flip as country-sensitive,
+  not as robust group-wide regularities.
+
+========================================================================
+(C) PEAK TFR YEAR PER COUNTRY
+========================================================================
+The year each country recorded its highest TFR in 2000-2023. Late peaks
+document renewed or sustained increases in period TFR but do not distinguish
+tempo effects (postponement/recuperation) from changes in completed fertility.
+
+   country         subgroup  peak_year  peak_tfr
+   Estonia           Baltic       2008      1.72
+    Latvia           Baltic       2016      1.74
+ Lithuania           Baltic       2015      1.71
+   Armenia         Caucasus       2022      1.72
+Azerbaijan         Caucasus       2013      2.15
+   Georgia         Caucasus       2016      2.23
+Kazakhstan     Central Asia       2021      3.32
+Kyrgyzstan     Central Asia       2019      3.33
+Tajikistan     Central Asia       2004      3.51
+Uzbekistan     Central Asia       2023      3.50
+   Belarus Eastern European       2015      1.73
+   Moldova Eastern European       2016      1.89
+    Russia Eastern European       2015      1.79
+   Ukraine Eastern European       2012      1.53
+
+  Countries peaking in 2015 or later: 10 of 14
+
+Saved -> figures/fig5_sigma_convergence.png
+
+========================================================================
+(E) PROJECTION-SENSITIVITY CHECK (descriptive only)
+========================================================================
+master_tfr.csv carries 'estimate_method', distinguishing WPP retrospective
+'Interpolation' from forward-looking 'Projection' values (20 of 336 rows,
+concentrated in 2020-2023 and in 11 of 14 countries' 2023 observations
+(Latvia, Lithuania and Russia are interpolated, not projected, in 2023); see
+01_clean_data.py). The (B2) post-2017 CV slope and the (B) beta-convergence
+coefficient above both partly rest on these projected endpoints. This block
+re-computes those two headline descriptive results under two BALANCED
+sub-samples, each holding a FIXED country set across all years it uses. An
+earlier version of this check instead dropped projected ROWS year-by-year,
+which let the country set drift over time (14 -> 12 -> 11 -> 10 countries,
+collapsing to 3 low-fertility countries by 2023). That composition drift, not
+genuine convergence, drove a spuriously negative post-2016 slope. A valid
+cross-time dispersion comparison requires the SAME countries in every year
+compared, so both samples below fix the country set before comparing years:
+  (a) full 2000-2023, all 14 countries (baseline, as reported above)
+  (b) Sample A - balanced historical: all 14 countries, 2000-2019, no
+      projected values anywhere in that window
+  (c) Sample B - balanced interpolation-only recent: countries with a
+      non-projected observation in EVERY year 2017-2022, that country set
+      then held fixed for all years used (list below; membership is
+      derived from the data, not hardcoded)
+This is NOT a significance test: no p-values or significance claims are made
+here, and the sub-samples are smaller than the already-small n=14/T=7 used
+above.
+
+  Sample B country set (n=10, non-projected in every
+  year 2017-2022): Azerbaijan, Estonia, Georgia, Kazakhstan, Kyrgyzstan, Latvia, Lithuania, Moldova, Russia, Uzbekistan
+
+  Sample                                          CV slope 2000-16  CV slope post-16      beta  n (beta)  excl  end window used
+  (a) Full 2000-2023 (baseline)                           -0.00715          +0.01954   +0.0013        14     0  2021-2023 (post-16: 2017-2023)
+  (b) Sample A: balanced historical (2000-19)             -0.00715          +0.02365   -0.0085        14     0  2017-2019 (post-16: 2017-2019)
+  (c) Sample B: balanced interp-only recent               -0.00333          +0.02613   +0.0052        10     0  2020-2022 (post-16: 2017-2022)
+
+  READING: the post-2016 CV slope is POSITIVE (rising dispersion) in all
+  three samples once the country set is held fixed — full sample
+  (+0.0195), Sample A (+0.0236,
+  though only 3 annual points, 2017-2019), and Sample B
+  (+0.0261, 2017-2022, the best-powered of the
+  three, n=10 countries, rising monotonically across those six years).
+  The balanced samples provide supporting evidence that the positive
+  post-2016 dispersion trend is not solely produced by the projected
+  observations or by year-to-year sample-composition changes. These are
+  descriptive slopes on small samples (Sample A has three post-2016
+  points; Sample B has ten countries), not formal tests.
+  Beta-convergence: full sample beta = +0.0013; Sample A (end
+  window 2017-2019, before most of the post-2017 divergence had
+  accumulated) beta = -0.0085; Sample B beta = +0.0052.
+  All entries in this block are descriptive point estimates; treat as a
+  sensitivity check, not a formal robustness test.
